@@ -5,11 +5,7 @@ import { extractId } from '../helpers';
   name: 'extractId',
 })
 export class ExtractIdPipe implements PipeTransform {
-  transform(value: string | null): string | null {
-    if (value === null) {
-      return null;
-    } else {
-      return extractId(value);
-    }
+  transform(url: string): string | null {
+    return extractId(url);
   }
 }

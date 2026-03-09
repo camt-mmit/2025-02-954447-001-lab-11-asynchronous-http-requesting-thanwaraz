@@ -1,9 +1,9 @@
 import { httpResource } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, inject, input, linkedSignal } from '@angular/core';
-import { disabled, form, FormField, submit } from '@angular/forms/signals';
-import { Person, ResultsList } from '../../types';
+import { FormField, disabled, form, submit } from '@angular/forms/signals';
 import { Router } from '@angular/router';
 import { purnEmptyProperties } from '../../helpers';
+import { Person, ResultsList } from '../../types';
 
 @Component({
   selector: 'app-people-http-resource-list-page',
@@ -12,7 +12,6 @@ import { purnEmptyProperties } from '../../helpers';
   styleUrl: './people-http-resource-list-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class PeopleHttpResourceListPage {
   readonly search = input<string>();
 
@@ -27,12 +26,13 @@ export class PeopleHttpResourceListPage {
       disabled(path, () => this.resource.isLoading());
     },
   );
-  private readonly Router = inject(Router);
-  protected async onSearch(): Promise<void> {
-    await submit(
+
+  private readonly router = inject(Router);
+  protected onSearch(): void {
+    submit(
       this.form,
       async (form) =>
-        void this.Router.navigate([], {
+        void this.router.navigate([], {
           queryParams: purnEmptyProperties(form().value()),
           replaceUrl: true,
         }),
@@ -43,5 +43,3 @@ export class PeopleHttpResourceListPage {
     this.onSearch();
   }
 }
-
-

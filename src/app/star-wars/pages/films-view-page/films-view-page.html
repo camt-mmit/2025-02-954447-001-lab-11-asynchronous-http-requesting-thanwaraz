@@ -2,7 +2,7 @@
   <button type="button" (click)="goBack()">Back</button>
 </nav>
 @if (dataResource.hasValue()) {
-  <app-person-view [data]="dataResource.value()" [moduleRoute]="moduleRoute"></app-person-view>
+  <app-films-view [data]="dataResource.value()" [moduleRoute]="moduleRoute"></app-films-view>
 } @else if (dataResource.error(); as error) {
   <p>{{ error.message }}</p>
 } @else if (dataResource.isLoading()) {

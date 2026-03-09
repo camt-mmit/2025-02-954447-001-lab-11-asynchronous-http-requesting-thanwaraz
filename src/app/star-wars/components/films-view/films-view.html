@@ -1,0 +1,61 @@
+<dl>
+  <dt>Title</dt>
+  <dd>{{ data().title }}</dd>
+
+  <dt>Episode ID</dt>
+  <dd>{{ data().episode_id }}</dd>
+
+  <dt>Opening Crawl</dt>
+  <dd>
+    <pre>{{ data().opening_crawl }}</pre>
+  </dd>
+
+  <dt>Director</dt>
+  <dd>{{ data().director }}</dd>
+
+  <dt>Producer</dt>
+  <dd>{{ data().producer }}</dd>
+
+  <dt>Relase date</dt>
+  <dd>{{ data().release_date | date }}</dd>
+
+  <dt>Characters</dt>
+  <dd>
+    <ul>
+      @if (charactersResource.hasValue()) {
+        @if (charactersResource.value(); as characters) {
+          @for (person of characters; track person.url) {
+            <li>
+              <a [routerLink]="['people', person.url | extractId]" [relativeTo]="moduleRoute()">
+                {{ person.name }}
+              </a>
+            </li>
+          }
+        }
+      }
+    </ul>
+  </dd>
+
+  <dt>Planets</dt>
+  <dd>
+    <ul>
+      @if (planetsResource.hasValue()) {
+        @if (planetsResource.value(); as planets) {
+          @for (planet of planets; track planet.url) {
+            <li>
+              <a [routerLink]="['planets', planet.url | extractId]" [relativeTo]="moduleRoute()">
+                {{ planet.name }}
+              </a>
+            </li>
+          }
+        }
+      }
+    </ul>
+  </dd>
+
+  <dt>Created</dt>
+  <dd>{{ data().created | date }}</dd>
+
+  <dt>Edited</dt>
+  <dd>{{ data().edited | date }}</dd>
+</dl>

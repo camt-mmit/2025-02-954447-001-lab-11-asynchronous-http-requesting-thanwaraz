@@ -1,7 +1,7 @@
 @if (data$ | async; as data) {
-<ul>
+  <ul>
     @for (item of data.results; track item.url) {
-    <li>{{ item.name }}</li>
+      <li>{{ item.name }}</li>
     }
-</ul>
+  </ul>
 }

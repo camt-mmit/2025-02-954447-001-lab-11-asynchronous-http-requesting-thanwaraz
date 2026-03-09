@@ -1,9 +1,16 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, linkedSignal } from '@angular/core';
-import { disabled, form, FormField, submit } from '@angular/forms/signals';
-import { peopleListResource, purnEmptyProperties } from '../../helpers';
-import { Router, RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  input,
+  linkedSignal,
+} from '@angular/core';
+import { FormField, disabled, form, submit } from '@angular/forms/signals';
+import { Router, RouterLink } from '@angular/router';
 import { PeopleList } from '../../components/people-list/people-list';
+import { peopleListResource, purnEmptyProperties } from '../../helpers';
 
 @Component({
   selector: 'app-people-list-page',
@@ -12,7 +19,6 @@ import { PeopleList } from '../../components/people-list/people-list';
   styleUrl: './people-list-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class PeopleListPage {
   readonly search = input<string>();
   readonly page = input<string>();
@@ -42,7 +48,6 @@ export class PeopleListPage {
       ? new URL(this.resource.value().next!).searchParams.get('page')
       : null,
   );
-
 
   protected readonly form = form(
     linkedSignal(() => ({ search: this.params().search }) as const),

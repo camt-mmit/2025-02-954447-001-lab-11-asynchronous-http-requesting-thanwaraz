@@ -1,9 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormField } from '@angular/forms/signals';
-import { RouterLink } from '@angular/router';
 import { Person, ResultsList } from '../../types';
-
 @Component({
   selector: 'app-people-fetched-list-page',
   imports: [AsyncPipe],
@@ -15,4 +12,4 @@ export class PeopleFetchedListPage {
   protected readonly data$ = fetch('https://swapi.dev/api/people').then(
     (res) => res.json() as Promise<ResultsList<Person>>,
   );
-};
+}

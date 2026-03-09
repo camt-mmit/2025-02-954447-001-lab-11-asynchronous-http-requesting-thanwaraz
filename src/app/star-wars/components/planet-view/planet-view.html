@@ -1,0 +1,70 @@
+<dl>
+  <dt>Name</dt>
+  <dd>{{ data().name }}</dd>
+
+  <dt>Diameter</dt>
+  <dd>{{ data().diameter }} KM</dd>
+
+  <dt>Rotation Period</dt>
+  <dd>{{ data().rotation_period }} Hr</dd>
+
+  <dt>Orbital Period</dt>
+  <dd>{{ data().orbital_period }} Days</dd>
+
+  <dt>Gravity</dt>
+  <dd>{{ data().gravity }}</dd>
+
+  <dt>Population</dt>
+  <dd>{{ data().population }}</dd>
+
+  <dt>Climate</dt>
+  <dd>{{ data().climate }}</dd>
+
+  <dt>Terrain</dt>
+  <dd>{{ data().terrain }}</dd>
+
+  <dt>Surface Water</dt>
+  <dd>{{ data().surface_water }}</dd>
+
+  <!-- Residents -->
+  <dt>Residents</dt>
+  <dd>
+    <ul>
+      @if (residentsResource.hasValue()) {
+        @if (residentsResource.value(); as residents) {
+          @for (person of residents; track person.url) {
+            <li>
+              <a [routerLink]="['people', person.url | extractId]" [relativeTo]="moduleRoute()">
+                {{ person.name }}
+              </a>
+            </li>
+          }
+        }
+      }
+    </ul>
+  </dd>
+
+  <!-- Films -->
+  <dt>Films</dt>
+  <dd>
+    <ul>
+      @if (filmsResource.hasValue()) {
+        @if (filmsResource.value(); as films) {
+          @for (film of films; track film.url) {
+            <li>
+              <a [routerLink]="['films', film.url | extractId]" [relativeTo]="moduleRoute()">
+                {{ film.title }}
+              </a>
+            </li>
+          }
+        }
+      }
+    </ul>
+  </dd>
+
+  <dt>Created</dt>
+  <dd>{{ data().created | date }}</dd>
+
+  <dt>Edited</dt>
+  <dd>{{ data().edited | date }}</dd>
+</dl>
