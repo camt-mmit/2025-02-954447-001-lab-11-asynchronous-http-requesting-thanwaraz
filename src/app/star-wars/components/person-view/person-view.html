@@ -1,0 +1,133 @@
+<dl>
+  <dt>Name</dt>
+  <dd>{{ data().name }}</dd>
+
+  <dt>birth_year</dt>
+  <dd>{{ data().birth_year }}</dd>
+
+  <dt>eye_color</dt>
+  <dd>{{ data().eye_color }}</dd>
+
+  <dt>gender</dt>
+  <dd>{{ data().gender }}</dd>
+
+  <dt>hair_color</dt>
+  <dd>{{ data().hair_color }}</dd>
+
+  <dt>height</dt>
+  <dd>{{ data().height }}</dd>
+
+  <dt>mass</dt>
+  <dd>{{ data().mass }}</dd>
+
+  <dt>skin_color</dt>
+  <dd>{{ data().skin_color }}</dd>
+
+  <dt>Homeworld (async)</dt>
+  <dd>
+    @if (data().homeworld !== null) {
+      @if (homeworld$() | async; as homeworld) {
+        <a [routerLink]="['planets', homeworld.url | extractId]" [relativeTo]="moduleRoute()">{{
+          homeworld.name
+        }}</a>
+      } @else {
+        <span>Loading...</span>
+      }
+    }
+  </dd>
+
+  <dt>Homeworld (Resource)</dt>
+  <dd>
+    @if (homeworldResource.hasValue()) {
+      @if (homeworldResource.value(); as homeworld) {
+        <a [routerLink]="['planets', homeworld.url | extractId]" [relativeTo]="moduleRoute()">{{
+          homeworld.name
+        }}</a>
+      }
+    } @else if (homeworldResource.error(); as error) {
+      <span>{{ error.message }}</span>
+    } @else if (homeworldResource.isLoading()) {
+      <span>Loading...</span>
+    }
+  </dd>
+
+  <dt>Homeworld (HttpResource)</dt>
+  <dd>
+    @if (homeworldHttpResource.hasValue()) {
+      <a
+        [routerLink]="['planets', homeworldHttpResource.value().url | extractId]"
+        [relativeTo]="moduleRoute()"
+        >{{ homeworldHttpResource.value()?.name }}</a
+      >
+    } @else if (homeworldHttpResource.error(); as error) {
+      <span>{{ error.message }}</span>
+    } @else if (homeworldHttpResource.isLoading()) {
+      <span>Loading...</span>
+    }
+  </dd>
+
+  <dt>Films (Async)</dt>
+  <dd>
+    <ul>
+      @for (item$ of asyncData().films$; track item$) {
+        <li>
+          @if (item$ | async; as item) {
+            <a [routerLink]="['films', item.url | extractId]" [relativeTo]="moduleRoute()">{{
+              item.title
+            }}</a>
+          } @else {
+            <span>Loading...</span>
+          }
+        </li>
+      }
+    </ul>
+  </dd>
+
+  <dt>Films (Resource)</dt>
+  <dd>
+    <ul>
+      @if (resourceData.films.hasValue()) {
+        @for (item of resourceData.films.value(); track item) {
+          <li>
+            <a [routerLink]="['films', item.url | extractId]" [relativeTo]="moduleRoute()">{{
+              item.title
+            }}</a>
+          </li>
+        }
+      } @else if (resourceData.films.error(); as error) {
+        <span>{{ error.message }}</span>
+      } @else if (resourceData.films.isLoading()) {
+        <span>Loading...</span>
+      }
+    </ul>
+  </dd>
+
+  <dt>Films (form)</dt>
+  <dd>
+    <ul>
+      @for (fieldTree of form.films; track fieldTree) {
+        <li>
+          @let resource = fieldTree().metadata(filmResourceKey)!;
+
+          @if (resource.hasValue()) {
+            <a
+              [routerLink]="['films', resource.value().url | extractId]"
+              [relativeTo]="moduleRoute()"
+              >{{ resource.value().title }}</a
+            >
+          } @else if (resource.error(); as error) {
+            <span>{{ error.message }}</span>
+          } @else if (resource.isLoading()) {
+            <span>Loading...</span>
+          }
+        </li>
+      }
+    </ul>
+  </dd>
+
+  <dt>Created</dt>
+  <dd>{{ data().created | date }}</dd>
+
+  <dt>Edited</dt>
+  <dd>{{ data().edited | date }}</dd>
+</dl>
