@@ -1,35 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
 :root {
-    font-family: sans-serif;
-    font-size: 16px;
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
-.app-cmp-nav {
-    @layer {
-        & {
-            --_font: var(--app-font);
-            --_font-size: var(--app-font-size);
-            --_color: var(--app-primary-color);
-            --_on-color: var(--app-on-primary-color);
-
-            --_text-color: var(--_color);
-            --_border-color: var(--_text-color);
-            --_background-color: transpalent;
-            --_filling-color: var(--app-surface-container-color);
-            --_column-gap: var(--app-column-gap);
-            --_row-gap: var(--app-row-gap);
-
-            --_border-style: 1px solid var(--_border-color);
-
-            &.app-cl-filled {
-                --_filling-color: color-mix(in srgb,
-                        var(--_background-color),
-                        var(--app-surface-container-color) 25%);
-
-                &>*:not(.app-st-active):not(:hover) {
-                    --_text-color: var(--app-on-surface-color);
-                }
-            }
-        }
-    }
+.app-st-active {
+  background-color: gray;
 }
